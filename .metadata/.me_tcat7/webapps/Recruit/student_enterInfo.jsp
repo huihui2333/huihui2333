@@ -1,0 +1,57 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>企业信息</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		-->
+	<!-- 导入easyui的资源文件 -->
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+	<link id="themeLink" rel="stylesheet" type="text/css"
+		href="easyui/themes/default/easyui.css">
+</head>
+
+<body>
+	<div id="info">
+		<form id="findForm" methon="post">
+			<input type="hidden" name="company_id">
+			公司简介： <br /><input type="text" name="company_profile" class="easyui-textbox"
+				data-options="prompt:'请输入公司简介',required:false,multiline:true"
+				style="width:500px;height:200px" /><br /><br />
+			 发展历程： <br /><input type="text" name="development_history" class="easyui-textbox"
+				data-options="prompt:'请输入发展历程',required:false,multiline:true"
+				style="width:500px;height:200px" /><br /><br />
+			 企业文化： <br /><input type="text" name="corporate_culture" class="easyui-textbox"
+				data-options="prompt:'请输入企业文化',required:false,multiline:true"
+				style="width:500px;height:200px" /><br /><br /> 
+			所具优势： <br /><input type="text" name="advantage" class="easyui-textbox"
+				data-options="prompt:'请输入所具优势',required:false,multiline:true"
+				style="width:500px;height:200px" /><br /><br /> 
+			招聘计划： <br /><input type="text" name="recuitment_plan" class="easyui-textbox"
+				data-options="prompt:'请输入招聘计划',required:false,multiline:true"
+				style="width:500px;height:200px" /><br /><br /> 
+			联系电话：<input type="text" name="contact_way" class="easyui-textbox"
+				data-options="required:false" /><br /> 
+			企业邮箱：<input type="text" name="company_email" class="easyui-textbox" 
+				data-options="required:false" /><br />
+		</form>
+	</div>
+	
+	<script type="text/javascript">
+  		function find(){
+  			//表单回显
+  			$("#findForm").form("load","customer/findEnterpriseInfo.action?id="+"1");
+  		}
+  	</script>
+	</body>
+</html>

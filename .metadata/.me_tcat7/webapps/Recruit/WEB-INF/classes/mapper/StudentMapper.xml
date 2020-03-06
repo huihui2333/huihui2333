@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 该文件编写mybatis中的mapper接口里面的方法提供对应的sql语句 -->
+<mapper namespace="cn.ssm.dao.StudentMapper">
+	<resultMap id="WordsBaseMap" type="cn.ssm.domain.Words">
+        <id column="lw_id" property="lw_id" jdbcType="INTEGER"/>
+        <result column="lw_name" property="lw_name" jdbcType="VARCHAR"/>
+        <result column="lw_date" property="lw_date" jdbcType="VARCHAR"/>
+        <result column="lw_content" property="lw_content" jdbcType="VARCHAR"/>
+        <result column="lw_for_name" property="lw_for_name" jdbcType="VARCHAR"/>
+        <result column="lw_for_article_id" property="lw_for_article_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ReplyBaseMap" type="cn.ssm.domain.Reply">
+        <id column="lr_id" property="lr_id" jdbcType="INTEGER"/>
+        <result column="lr_name" property="lr_name" jdbcType="VARCHAR"/>
+        <result column="lr_date" property="lr_date" jdbcType="VARCHAR"/>
+        <result column="lr_content" property="lr_content" jdbcType="VARCHAR"/>
+        <result column="lr_for_name" property="lr_for_name" jdbcType="VARCHAR"/>
+        <result column="lr_for_words" property="lr_for_words" jdbcType="VARCHAR"/>
+        <result column="lr_for_article_id" property="lr_for_article_id" jdbcType="VARCHAR"/>
+    </resultMap>
+	
+	 <insert id="saveWords" parameterType="cn.ssm.domain.Words">
+        insert into words(
+          lw_name,
+          lw_date,
+          lw_content,
+          lw_for_name,
+          lw_for_article_id
+        )
+        values(
+          #{lw_name},
+          #{lw_date},
+          #{lw_content},
+          #{lw_for_name},
+          #{lw_for_article_id}
+        )
+    </insert>
+
+    <!-- 保存回复信息 -->
+    <insert id="saveReply" parameterType="cn.ssm.domain.Reply">
+        insert into reply(
+          lr_name,
+          lr_date,
+          lr_content,
+          lr_for_name,
+          lr_for_words,
+          lr_for_reply,
+          lr_for_article_id
+        )
+        values(
+          #{lr_name},
+          #{lr_date},
+          #{lr_content},
+          #{lr_for_name},
+          #{lr_for_words},
+          #{lr_for_reply},
+          #{lr_for_article_id}
+        )
+    </insert>
+
+    <!-- 查询所有留言信息 -->
+    <select id="findAllWords" resultMap="WordsBaseMap">
+        select * from words
+    </select>
+
+    <!-- 查询所有回复信息 -->
+    <select id="findAllReply" resultMap="ReplyBaseMap">
+        select * from reply
+    </select>
+</mapper>

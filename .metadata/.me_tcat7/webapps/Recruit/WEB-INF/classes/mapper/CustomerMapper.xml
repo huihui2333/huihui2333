@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 该文件编写mybatis中的mapper接口里面的方法提供对应的sql语句 -->
+<mapper namespace="cn.ssm.dao.CustomerMapper">
+	<select id="findAl" resultType="cn.ssm.domain.Customer">
+		SELECT t_customer.id,
+		    t_customer.name,
+		    t_customer.gender,
+		    t_customer.telephone,
+		    t_customer.address
+		FROM ssm.t_customer
+	</select>
+	
+	<!-- 添加客户 -->
+	<insert id="save" parameterType="cn.ssm.domain.Customer">
+		INSERT INTO ssm.t_customer
+			(
+			name,
+			gender,
+			telephone,
+			address)
+			VALUES
+			(
+			#{name},
+			#{gender},
+			#{telephone},
+			#{address})
+	</insert>
+	
+	<!-- 根据id查询对象 -->
+	<select id="findById" parameterType="int" resultType="cn.ssm.domain.Customer">
+		SELECT id,
+		name,
+		gender,
+		telephone,
+		address
+		FROM ssm.t_customer
+		where id=#{value}
+	</select>
+	
+	<!-- 根据id修改数据 -->
+	<update id="update" parameterType="cn.ssm.domain.Customer">
+		UPDATE ssm.t_customer
+		SET
+		name=#{name},
+		gender=#{gender},
+		telephone=#{telephone},
+		address=#{address}
+		where id=#{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Integer[]">
+		DELETE FROM ssm.t_customer
+		<where>
+			id
+			<foreach collection="array" item="id" open="in(" close=")" separator=",">
+			#{id}
+			</foreach>
+		</where>
+	</delete>
+	
+	<resultMap type="cn.ssm.domain.User" id="UserResult">
+ 		<id property="id" column="id"></id>
+ 		<result property="username" column="username"></result>
+ 		<result property="password" column="password"></result>
+ 	</resultMap>
+	
+	<select id="login" parameterType="cn.ssm.domain.User" resultMap="UserResult"> 
+         select * from user where username=#{username} and password=#{password}
+     </select>
+     
+     <select id="regist" parameterType="cn.ssm.domain.User" resultMap="UserResult">
+		insert into user(username,password) values(#{username},#{password})
+	</select> 
+	
+	<select id="findAlEnterpriseInfo" resultType="cn.ssm.domain.EnterpriseInfo">
+		SELECT company_id,
+			company_info.company_profile,
+		    company_info.development_history,
+		    company_info.corporate_culture,
+		    company_info.advantage,
+		    company_info.recuitment_plan,
+		    company_info.contact_way,
+		    company_info.company_email
+		FROM ssm.company_info
+
+	</select>
+	
+	<select id="findEnterpriseById" parameterType="int" resultType="cn.ssm.domain.EnterpriseInfo">
+		SELECT company_id,
+			company_profile,
+		    development_history,
+		    corporate_culture,
+		    advantage,
+		    recuitment_plan,
+		    contact_way,
+		    company_email
+		FROM ssm.company_info
+		where company_id=#{value}
+	</select>
+	
+	<update id="updateEnterprise" parameterType="cn.ssm.domain.EnterpriseInfo">
+		UPDATE ssm.company_info
+			SET
+			company_profile = #{company_profile},
+			development_history = #{development_history},
+			corporate_culture = #{corporate_culture},
+			advantage = #{advantage},
+			recuitment_plan = #{recuitment_plan},
+			contact_way = #{contact_way},
+			company_email = #{company_email}
+			where company_id=#{company_id}
+	</update>
+	
+	<insert id="saveEnterprise" parameterType="cn.ssm.domain.EnterpriseInfo">
+		INSERT INTO ssm.company_info
+			(company_profile,
+			development_history,
+			corporate_culture,
+			advantage,
+			recuitment_plan,
+			contact_way,
+			company_email)
+			VALUES
+			(#{company_profile},
+			#{development_history},
+			#{corporate_culture},
+			#{advantage},
+			#{recuitment_plan},
+			#{contact_way},
+			#{company_email})
+	</insert>
+	
+	<select id="findAlJob" resultType="cn.ssm.domain.Job">
+		SELECT job_info.job_id,
+		    job_info.job_depart,
+		    job_info.job_city,
+		    job_info.job_name,
+		    job_info.job_describe,
+		    job_info.requirements
+		FROM ssm.job_info
+	</select>
+	
+	<update id="updateJob" parameterType="cn.ssm.domain.Job">
+		UPDATE ssm.job_info
+		SET
+		job_depart = #{job_depart},
+		job_city = #{job_city},
+		job_name = #{job_name},
+		job_describe = #{job_describe},
+		requirements = #{requirements}
+		WHERE job_id = #{job_id}
+	</update>
+	
+	<insert id="saveJob" parameterType="cn.ssm.domain.Job">
+		INSERT INTO ssm.job_info
+			(
+			job_depart,
+			job_city,
+			job_name,
+			job_describe,
+			requirements)
+			VALUES
+			(
+			#{job_depart},
+			#{job_city},
+			#{job_name},
+			#{job_describe},
+			#{requirements})
+	</insert>
+	
+	<select id="findJobById" parameterType="int" resultType="cn.ssm.domain.Job">
+		SELECT job_info.job_id,
+		    job_info.job_depart,
+		    job_info.job_city,
+		    job_info.job_name,
+		    job_info.job_describe,
+		    job_info.requirements
+		FROM ssm.job_info
+		where job_id=#{value}
+	</select>
+	
+	<delete id="deleteJob" parameterType="Integer[]">
+		DELETE FROM ssm.job_info
+		<where>
+			job_id
+			<foreach collection="array" item="job_id" open="in(" close=")" separator=",">
+				#{job_id}
+			</foreach>
+		</where>
+	</delete>
+	
+	<select id="findAllPrize" resultType="cn.ssm.domain.Prize">
+		SELECT prize_info.prize_id,
+		    prize_info.prize_name,
+		    prize_info.prize_amount,
+		    prize_info.user_id
+		FROM ssm.prize_info
+	</select>
+	
+	<update id="updatePrize" parameterType="cn.ssm.domain.Prize">
+		UPDATE ssm.prize_info
+			SET
+			prize_name = #{prize_name},
+			prize_amount = #{prize_amount},
+			user_id = #{user_id}
+			WHERE prize_id = #{prize_id}
+	</update>
+	
+	<insert id="savePrize" parameterType="cn.ssm.domain.Prize">
+		INSERT INTO ssm.prize_info
+			(
+			prize_name,
+			prize_amount,
+			user_id)
+			VALUES
+			(
+			#{prize_name},
+			#{prize_amount},
+			#{user_id})
+	</insert>
+	
+	<select id="findPrizeById" parameterType="int" resultType="cn.ssm.domain.Prize">
+	SELECT prize_info.prize_id,
+		    prize_info.prize_name,
+		    prize_info.prize_amount,
+		    prize_info.user_id
+		FROM ssm.prize_info
+		where prize_id=#{value}
+	</select>
+	
+	<delete id="deletePrize" parameterType="Integer[]">
+		DELETE FROM ssm.prize_info
+		<where>
+			prize_id
+			<foreach collection="array" item="prize_id" open="in(" close=")" separator=",">
+				#{prize_id}
+			</foreach>
+		</where>
+	</delete>
+	
+	<select id="findAllAnnounce" resultType="cn.ssm.domain.Announce">
+		SELECT announce_info.announce_id,
+		    announce_info.user_id,
+		    announce_info.announce_title,
+		    announce_info.announce_content,
+		    announce_info.announce_type,
+		    announce_info.announce_time
+		FROM ssm.announce_info
+	</select>
+	
+	<update id="updateAnnounce" parameterType="cn.ssm.domain.Announce">
+		UPDATE ssm.announce_info
+			SET
+			user_id = #{user_id},
+			announce_title = #{announce_title},
+			announce_content = #{announce_content},
+			announce_type = #{announce_type},
+			announce_time = #{announce_time}
+			WHERE announce_id = #{announce_id}
+	</update>
+	
+	<insert id="saveAnnounce" parameterType="cn.ssm.domain.Announce">
+		INSERT INTO ssm.announce_info
+			(
+			user_id,
+			announce_title,
+			announce_content,
+			announce_type,
+			announce_time)
+			VALUES
+			(
+			#{user_id},
+			#{announce_title},
+			#{announce_content},
+			#{announce_type},
+			#{announce_time})
+	</insert>
+	
+	<select id="findAnnounceById" parameterType="int" resultType="cn.ssm.domain.Announce">
+		SELECT announce_info.announce_id,
+		    announce_info.user_id,
+		    announce_info.announce_title,
+		    announce_info.announce_content,
+		    announce_info.announce_type,
+		    announce_info.announce_time
+		FROM ssm.announce_info
+		where announce_id=#{value}
+	</select>
+	
+	<delete id="deleteAnnounce" parameterType="Integer[]">
+		DELETE FROM ssm.announce_info
+		<where>
+			announce_id
+			<foreach collection="array" item="announce_id" open="in(" close=")" separator=",">
+				#{announce_id}
+			</foreach>
+		</where>
+	</delete>
+	
+	<resultMap id="WordsBaseMap" type="cn.ssm.domain.Words">
+        <id column="lw_id" property="lw_id" jdbcType="INTEGER"/>
+        <result column="lw_name" property="lw_name" jdbcType="VARCHAR"/>
+        <result column="lw_date" property="lw_date" jdbcType="VARCHAR"/>
+        <result column="lw_content" property="lw_content" jdbcType="VARCHAR"/>
+        <result column="lw_for_name" property="lw_for_name" jdbcType="VARCHAR"/>
+        <result column="lw_for_article_id" property="lw_for_article_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ReplyBaseMap" type="cn.ssm.domain.Reply">
+        <id column="lr_id" property="lr_id" jdbcType="INTEGER"/>
+        <result column="lr_name" property="lr_name" jdbcType="VARCHAR"/>
+        <result column="lr_date" property="lr_date" jdbcType="VARCHAR"/>
+        <result column="lr_content" property="lr_content" jdbcType="VARCHAR"/>
+        <result column="lr_for_name" property="lr_for_name" jdbcType="VARCHAR"/>
+        <result column="lr_for_words" property="lr_for_words" jdbcType="VARCHAR"/>
+        <result column="lr_for_article_id" property="lr_for_article_id" jdbcType="VARCHAR"/>
+    </resultMap>
+	
+	 <insert id="saveWords" parameterType="cn.ssm.domain.Words">
+        insert into words(
+          lw_name,
+          lw_date,
+          lw_content,
+          lw_for_name,
+          lw_for_article_id
+        )
+        values(
+          #{lw_name},
+          #{lw_date},
+          #{lw_content},
+          #{lw_for_name},
+          #{lw_for_article_id}
+        )
+    </insert>
+
+    <!-- 保存回复信息 -->
+    <insert id="saveReply" parameterType="cn.ssm.domain.Reply">
+        insert into reply(
+          lr_name,
+          lr_date,
+          lr_content,
+          lr_for_name,
+          lr_for_words,
+          lr_for_reply,
+          lr_for_article_id
+        )
+        values(
+          #{lr_name},
+          #{lr_date},
+          #{lr_content},
+          #{lr_for_name},
+          #{lr_for_words},
+          #{lr_for_reply},
+          #{lr_for_article_id}
+        )
+    </insert>
+
+    <!-- 查询所有留言信息 -->
+    <select id="findAllWords" resultMap="WordsBaseMap">
+        select * from words
+    </select>
+
+    <!-- 查询所有回复信息 -->
+    <select id="findAllReply" resultMap="ReplyBaseMap">
+        select * from reply
+    </select>
+</mapper>

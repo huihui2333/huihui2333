@@ -1,0 +1,18 @@
+二月 18, 2020 10:24:28 上午 com.genuitec.pulse.client.deliverypackage.runtime.internal.Activator initializeLoggers
+信息: Package starting up at Tue Feb 18 10:24:28 CST 2020
+二月 18, 2020 10:24:50 上午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForWorkspaceUpdates
+信息: Latest version of package has already been enabled in the workspace; check finished in 13ms
+二月 18, 2020 10:25:27 上午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForUpdates
+信息: Newer promotion of package is available; update check finished in 7247ms
+二月 18, 2020 10:25:44 上午 org.hibernate.eclipse.HibernatePlugin start
+信息: HibernatePlugin Started
+二月 19, 2020 12:31:51 下午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForUpdates
+信息: Newer promotion of package is available; update check finished in 9122ms
+二月 21, 2020 10:04:53 上午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForUpdates
+信息: Newer promotion of package is available; update check finished in 15458ms
+二月 23, 2020 11:43:00 上午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForUpdates
+信息: Newer promotion of package is available; update check finished in 17175ms
+三月 04, 2020 10:31:14 上午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForUpdates
+信息: Newer promotion of package is available; update check finished in 20745ms
+三月 06, 2020 3:06:27 下午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForUpdates
+信息: Newer promotion of package is available; update check finished in 20532ms
